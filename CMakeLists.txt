@@ -15,7 +15,7 @@ add_subdirectory(lvgl)
 find_package(SDL2 REQUIRED)
 
 # the main executable
-list(APPEND SRC_FILES src/main.c src/widget/rpm.c)
+list(APPEND SRC_FILES src/main.c src/widget/rpm.c src/fonts/Roboto.c)
 add_executable(lvgl_test ${SRC_FILES})
 
 # in order to find lv_conf.h
