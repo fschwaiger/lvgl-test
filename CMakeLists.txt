@@ -15,10 +15,11 @@ add_subdirectory(lvgl)
 find_package(SDL2 REQUIRED)
 
 # the main executable
-add_executable(lvgl_test src/main.c)
+list(APPEND SRC_FILES src/main.c src/widget/rpm.c)
+add_executable(lvgl_test ${SRC_FILES})
 
 # in order to find lv_conf.h
 target_include_directories(lvgl_test PRIVATE ${PROJECT_SOURCE_DIR})
 
 # link the lvgl and SDL2 libraries
-target_link_libraries(lvgl_test PRIVATE lvgl SDL2::SDL2)
+target_link_libraries(lvgl_test PRIVATE lvgl SDL2::SDL2 m)
