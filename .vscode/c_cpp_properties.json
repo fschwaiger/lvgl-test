@@ -3,7 +3,8 @@
         {
             "name": "LVGL",
             "includePath": [
-                "${workspaceFolder}/"
+                "${workspaceFolder}/",
+                "${workspaceFolder}/src/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/clang-18",

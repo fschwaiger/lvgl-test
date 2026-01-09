@@ -4,20 +4,24 @@
 #include <pthread.h>
 #include <math.h>
 #include "lvgl/lvgl.h"
-#include "widget/rpm.h"
+#include "panels/rpms.h"
 
 int main(void)
 {
     lv_init();
 
-    lv_display_t *disp = lv_sdl_window_create(256, 256);
+    lv_display_t *disp = lv_sdl_window_create(480, 320);
     lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex3(0x000), LV_PART_MAIN);
+    lv_obj_set_flex_flow(lv_screen_active(), LV_FLEX_FLOW_COLUMN);
+    lv_obj_set_flex_align(lv_screen_active(), LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
 
-    lv_subject_t rpm_subject;
-    lv_subject_init_float(&rpm_subject, 1300.0f);
+    rpms_x6_subject_t rpm_subjects;
+    for (int i = 0; i < 6; i++)
+    {
+        lv_subject_init_float(&rpm_subjects.rpms[i], 1300.0f);
+    }
 
-    av_create_rpm_widget(lv_scr_act(), 10, 10, &rpm_subject);
-    av_create_rpm_widget(lv_scr_act(), 10, 110, &rpm_subject);
+    av_create_rpms_panel(lv_scr_act(), &rpm_subjects);
 
     static int t = 0;
     while (1)
@@ -27,7 +31,10 @@ int main(void)
         {
             // sine wave on the rpm from 400 to 1800
             float rpm_value = 1100.0f + 700.0f * sinf(t * 0.0001f);
-            lv_subject_set_float(&rpm_subject, rpm_value);
+            for (int i = 0; i < 6; i++)
+            {
+                lv_subject_set_float(&rpm_subjects.rpms[i], rpm_value);
+            }
         }
 
         uint32_t sleep_time_ms = lv_timer_handler();

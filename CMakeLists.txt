@@ -14,12 +14,12 @@ add_subdirectory(lvgl)
 # contains the SDL2 library
 find_package(SDL2 REQUIRED)
 
-# the main executable
-list(APPEND SRC_FILES src/main.c src/widget/rpm.c src/fonts/Roboto.c)
+# the main executable, all .c files in src/
+file(GLOB SRC_FILES "src/**/*.c" "src/*.c")
 add_executable(lvgl_test ${SRC_FILES})
 
 # in order to find lv_conf.h
-target_include_directories(lvgl_test PRIVATE ${PROJECT_SOURCE_DIR})
+target_include_directories(lvgl_test PRIVATE ${PROJECT_SOURCE_DIR}, ${PROJECT_SOURCE_DIR}/src)
 
 # link the lvgl and SDL2 libraries
 target_link_libraries(lvgl_test PRIVATE lvgl SDL2::SDL2 m)
