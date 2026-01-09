@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "test",
+			"command": "cmake -B build && cmake --build build -j16 && build/lvgl_test",
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+		}
+	]
+}

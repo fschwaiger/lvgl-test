@@ -11,14 +11,13 @@ int main(void)
     lv_init();
 
     lv_display_t *disp = lv_sdl_window_create(256, 256);
-
     lv_obj_set_style_bg_color(lv_screen_active(), lv_color_hex3(0x000), LV_PART_MAIN);
 
     lv_subject_t rpm_subject;
     lv_subject_init_float(&rpm_subject, 1300.0f);
 
-    av_define_rpm_widget(lv_scr_act(), 10, 10, &rpm_subject);
-    av_define_rpm_widget(lv_scr_act(), 10, 110, &rpm_subject);
+    av_create_rpm_widget(lv_scr_act(), 10, 10, &rpm_subject);
+    av_create_rpm_widget(lv_scr_act(), 10, 110, &rpm_subject);
 
     static int t = 0;
     while (1)
